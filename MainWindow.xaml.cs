@@ -357,7 +357,12 @@ namespace PershingLayoutReader
                                         repeatedColumn.Add(currentColumn);
 
                                         //Append to the stringbuilder         
-                                        
+
+                                        if(strEnd > 255)
+                                        {
+                                            strEnd = 255;
+                                        }
+
                                         sbRowAdd.Append("\t" + "rowArr.Add(\"" + columnName + "_" + rowCount + "\", strLine.Substring(" + strStart + ", " + strEnd + "));" + "\t" + "\t" + "//" + columnName);
                                         sbRowAdd.AppendLine();
 
@@ -415,8 +420,18 @@ namespace PershingLayoutReader
                                             columnName += repeatedColumn.Where(x => x.Equals(currentColumn)).Count();
                                         }
 
-                                        repeatedColumn.Add(currentColumn);     
-                                        
+                                        repeatedColumn.Add(currentColumn);
+
+                                        if (right > 255)
+                                        {
+                                            right = 255;
+                                        }
+
+                                        if (left > 255)
+                                        {
+                                            left = 255;
+                                        }
+
 
                                         sbRowAdd.Append("\t" + "rowArr.Add(\"" + columnName + "_" + rowCount + "\", strLine.Substring(" + strStart + ", " + left + ").TrimStart(new Char[] { '0' }) + '.' + strLine.Substring(" + (strStart += left) + ", " + right + "));" + "\t" + "\t" + "//" + columnName);
                                         sbRowAdd.AppendLine();
